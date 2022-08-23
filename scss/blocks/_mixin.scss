@@ -1,0 +1,36 @@
+@mixin triangle2($size: 15px, $triangle-color: darkcyan, $direction: bottom) {
+  position: relative;
+  z-index: 1;
+
+  &::before {
+    position: absolute;
+    z-index: -1;
+    width: 0;
+    height: 0;
+    border-right: $size solid transparent;
+    border-bottom: $size solid $triangle-color;
+    border-left: $size solid transparent;
+
+    @if $direction == topLeft {
+      left: 0;
+      top: 0;
+      transform: translateX(-50%) rotate(180deg);
+    } @else if $direction == topRight {
+      top: 0;
+      right: 0;
+      transform: translateX(50%) rotate(180deg);
+    } @else if $direction == bottomLeft {
+      bottom: 0;
+      left: 0;
+      transform: translateX(-50%);
+    } @else if $direction == bottomRight {
+      bottom: 0;
+      right: 0;
+      transform: translateX(50%);
+    } @else {
+      @error "Unknown direction";
+    }
+
+    content: "";
+  }
+}
